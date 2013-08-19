@@ -1,4 +1,4 @@
-package net.nunnerycode.libraries.cannonball;
+package net.nunnerycode.java.libraries.cannonball;
 
 import java.io.File;
 import java.io.FileWriter;
