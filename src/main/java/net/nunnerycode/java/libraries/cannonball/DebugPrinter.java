@@ -12,6 +12,10 @@ public class DebugPrinter {
 	private File debugFolder;
 	private File debugFile;
 
+	public DebugPrinter(File file) {
+		this(file.getParentFile(), file);
+	}
+
 	public DebugPrinter(String folderPath, String fileName) {
 		this(new File(folderPath), new File(folderPath, fileName));
 	}
