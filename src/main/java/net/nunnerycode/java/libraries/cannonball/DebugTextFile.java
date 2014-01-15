@@ -1,9 +1,13 @@
 package net.nunnerycode.java.libraries.cannonball;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DebugTextFile {
 
@@ -65,6 +69,31 @@ public class DebugTextFile {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public List<String> read() {
+		List<String> list = new ArrayList<String>();
+		try {
+			if (!getDebugFolder().exists() && !getDebugFolder().mkdirs()) {
+				return list;
+			}
+			File readFile = getDebugFile();
+			if (!readFile.exists() && !readFile.createNewFile()) {
+				return list;
+			}
+			FileReader fileReader = new FileReader(readFile);
+			BufferedReader bufferedReader = new BufferedReader(fileReader);
+			String p;
+			while ((p = bufferedReader.readLine()) != null) {
+				if (!p.contains("#") && p.length() > 0) {
+					list.add(p);
+				}
+			}
+			bufferedReader.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return list;
 	}
 
 	public File getDebugFolder() {
